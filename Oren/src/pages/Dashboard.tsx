@@ -62,6 +62,11 @@ export default function Dashboard() {
   return (
     <div className="bg-background">
       <main className="container mx-auto px-4 py-4">
+        <div className="flex items-center gap-4 mb-6">
+          <img src="/favicon.png" alt="Oren Logo" className="w-12 h-12 object-contain bg-primary/10 rounded-xl p-2" />
+          <h1 className="text-3xl font-bold text-primary tracking-tight">Oren Dashboard</h1>
+        </div>
+        
         {/* Search Bar */}
         <div className="relative mb-6">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />

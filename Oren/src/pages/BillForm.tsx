@@ -334,9 +334,6 @@ export default function BillForm() {
               <ArrowLeft />
             </Button>
             <div className="flex-1 text-center flex flex-col items-center">
-              {profile?.logo && (
-                <img src={profile.logo} alt="Business Logo" className="h-12 w-auto mb-2 object-contain bg-white rounded-md p-1" />
-              )}
               <h1 className="text-4xl font-bold tracking-tight">{profile?.businessName || "Your Business Name"}</h1>
               <p className="text-sm opacity-90 mt-2 max-w-lg mx-auto">{profile?.address || "Your Address"}</p>
             </div>
