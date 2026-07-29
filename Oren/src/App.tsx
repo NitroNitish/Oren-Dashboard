@@ -9,6 +9,7 @@ import { BusinessProfileProvider } from "./contexts/BusinessProfileContext";
 import AppLayout from "./components/AppLayout";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
+import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import QuotationForm from "./pages/QuotationForm";
 import BillForm from "./pages/BillForm";
@@ -39,7 +40,8 @@ const App = () => (
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/rate/:projectId" element={<PublicRating />} />
               <Route path="/onboarding" element={<Onboarding />} />
-              <Route path="/" element={<AppLayout><Dashboard /></AppLayout>} />
+              <Route path="/" element={<Landing />} />
+              <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
               <Route path="/quotation/new" element={<AppLayout><QuotationForm /></AppLayout>} />
               <Route path="/quotation/edit/:id" element={<AppLayout><QuotationForm /></AppLayout>} />
               <Route path="/bill/new" element={<AppLayout><BillForm /></AppLayout>} />

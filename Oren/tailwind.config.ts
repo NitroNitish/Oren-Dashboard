@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -83,10 +83,23 @@ export default {
             height: "0",
           },
         },
+        blurFadeUp: {
+          from: {
+            opacity: "0",
+            filter: "blur(20px)",
+            transform: "translateY(40px)",
+          },
+          to: {
+            opacity: "1",
+            filter: "blur(0)",
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "blur-fade-up": "blurFadeUp 1s ease-out forwards",
       },
     },
   },
