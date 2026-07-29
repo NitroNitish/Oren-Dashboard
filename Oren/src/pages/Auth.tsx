@@ -164,13 +164,13 @@ export default function Auth() {
     return (
       <div className="min-h-screen w-full flex font-sans">
         <LeftPanel />
-        <div className="w-full md:w-[35%] flex items-center justify-center p-8 bg-white">
+        <div className="w-full md:w-[35%] flex items-center justify-center p-8 bg-background">
           <div className="w-full max-w-md space-y-8">
             <div className="text-center md:text-left">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">
+              <h2 className="text-4xl font-bold text-foreground mb-2">
                 Reset <span className="text-[#ff5a1f]">Password</span>
               </h2>
-              <p className="text-gray-500 text-sm">
+              <p className="text-muted-foreground text-sm">
                 Enter your email address and we'll send you a link to reset your password.
               </p>
             </div>
@@ -178,14 +178,14 @@ export default function Auth() {
             <form onSubmit={handleForgotPassword} className="space-y-4">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
+                  <Mail className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <Input
                   type="email"
                   placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 h-12 bg-white border-gray-200"
+                  className="pl-10 h-12 bg-background border-input"
                   required
                 />
               </div>
@@ -198,7 +198,7 @@ export default function Auth() {
               <button
                 type="button"
                 onClick={() => setIsForgotPassword(false)}
-                className="text-gray-500 hover:text-[#ff5a1f] font-semibold hover:underline"
+                className="text-muted-foreground hover:text-[#ff5a1f] font-semibold hover:underline"
               >
                 Back to Login
               </button>
@@ -214,14 +214,14 @@ export default function Auth() {
       <LeftPanel />
 
       {/* Right Panel - Form */}
-      <div className="w-full md:w-[35%] flex items-center justify-center p-8 bg-white">
+      <div className="w-full md:w-[35%] flex items-center justify-center p-8 bg-background">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center md:text-left">
-            <h2 className="text-4xl font-bold text-gray-900 mb-2">
+            <h2 className="text-4xl font-bold text-foreground mb-2">
               {isLogin ? "Welcome " : "Create "}
               <span className="text-[#ff5a1f]">{isLogin ? "Back" : "Account"}</span>
             </h2>
-            <p className="text-gray-500 text-sm">
+            <p className="text-muted-foreground text-sm">
               {isLogin ? "Sign in to your account to continue." : "Start managing your work with Oren."}
             </p>
           </div>
@@ -232,14 +232,14 @@ export default function Auth() {
             {!isLogin && (
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-gray-400" />
+                  <User className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <Input
                   type="text"
                   placeholder="Full Name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="pl-10 h-12 bg-white border-gray-200 placeholder:text-gray-400"
+                  className="pl-10 h-12 bg-background border-input placeholder:text-muted-foreground"
                   required={!isLogin}
                 />
               </div>
@@ -247,28 +247,28 @@ export default function Auth() {
             
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-gray-400" />
+                <Mail className="h-5 w-5 text-muted-foreground" />
               </div>
               <Input
                 type="email"
                 placeholder="Email Address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="pl-10 h-12 bg-white border-gray-200 placeholder:text-gray-400"
+                className="pl-10 h-12 bg-background border-input placeholder:text-muted-foreground"
                 required
               />
             </div>
 
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-gray-400" />
+                <Lock className="h-5 w-5 text-muted-foreground" />
               </div>
               <Input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 h-12 bg-white border-gray-200 placeholder:text-gray-400"
+                className="pl-10 h-12 bg-background border-input placeholder:text-muted-foreground"
                 required
               />
             </div>
@@ -276,14 +276,14 @@ export default function Auth() {
             {!isLogin && (
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+                  <Lock className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <Input
                   type="password"
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="pl-10 h-12 bg-white border-gray-200 placeholder:text-gray-400"
+                  className="pl-10 h-12 bg-background border-input placeholder:text-muted-foreground"
                   required={!isLogin}
                 />
               </div>
@@ -294,7 +294,7 @@ export default function Auth() {
                 <button
                   type="button"
                   onClick={() => setIsForgotPassword(true)}
-                  className="text-sm text-gray-500 hover:text-[#ff5a1f] hover:underline"
+                  className="text-sm text-muted-foreground hover:text-[#ff5a1f] hover:underline"
                 >
                   Forgot your password?
                 </button>
@@ -310,7 +310,7 @@ export default function Auth() {
             </Button>
           </form>
 
-          <div className="mt-8 text-center text-sm text-gray-500">
+          <div className="mt-8 text-center text-sm text-muted-foreground">
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button
               type="button"

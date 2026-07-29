@@ -324,13 +324,13 @@ export default function QuotationForm() {
       </header>
 
       <main className="container mx-auto px-4 py-8 max-w-5xl">
-        <div className="bg-white shadow-xl rounded-lg p-10 border border-gray-200">
+        <div className="bg-card text-card-foreground shadow-xl rounded-lg p-10 border border-border">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-primary mb-2">{id ? "Edit Quotation" : "New Quotation"}</h2>
             <p className="text-sm text-muted-foreground">Date: {new Date().toLocaleDateString()}</p>
           </div>
 
-          <div className="border-b-2 border-gray-200 pb-6 mb-8">
+          <div className="border-b-2 border-border pb-6 mb-8">
             <div className="grid grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="projectTitle" className="text-base font-semibold">Project Title *</Label>
@@ -378,7 +378,7 @@ export default function QuotationForm() {
                 <div className="col-span-1"></div>
               </div>
               {items.map((item, index) => (
-                <div key={index} className="py-2 bg-white rounded mb-2 px-2">
+                <div key={index} className="py-2 bg-card rounded mb-2 px-2">
                   <div className="grid grid-cols-12 gap-3 items-center">
                     <div className="col-span-5">
                       <Input
@@ -482,7 +482,7 @@ export default function QuotationForm() {
 
           <div className="mb-8">
             <Label className="mb-3 block text-base font-semibold">Authorized Signature</Label>
-            <div className="border-2 border-gray-300 rounded-lg bg-white">
+            <div className="border-2 border-border rounded-lg bg-card">
               <SignatureCanvas
                 ref={signatureRef}
                 canvasProps={{
