@@ -37,15 +37,24 @@ export default function AddProject() {
     try {
       const uploadedImages: string[] = [];
 
-      // Convert images to Base64 to bypass Supabase Storage bucket requirements
+      // Upload images to Supabase Storage bucket
       for (const image of images) {
-        const base64 = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(image);
-          reader.onload = () => resolve(reader.result as string);
-          reader.onerror = (error) => reject(error);
-        });
-        uploadedImages.push(base64);
+        const fileExt = image.name.split('.').pop();
+        const fileName = `${crypto.randomUUID()}.${fileExt}`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('project-images')
+          .upload(fileName, image);
+          
+        if (uploadError) {
+          throw uploadError;
+        }
+        
+        const { data: publicUrlData } = supabase.storage
+          .from('project-images')
+          .getPublicUrl(fileName);
+          
+        uploadedImages.push(publicUrlData.publicUrl);
       }
 
       // Insert project

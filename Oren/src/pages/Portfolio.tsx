@@ -23,7 +23,7 @@ export default function Portfolio() {
   }, []);
 
   const loadProjects = async () => {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("projects")
       .select(`
         *,
@@ -35,6 +35,10 @@ export default function Portfolio() {
       `)
       .order("created_at", { ascending: false });
     
+    if (error) {
+      console.error("Error loading projects:", error);
+      toast.error(`Error loading projects: ${error.message}`);
+    }
     if (data) setProjects(data);
   };
 
