@@ -37,23 +37,15 @@ export default function AddProject() {
     try {
       const uploadedImages: string[] = [];
 
-      // Upload images to Supabase Storage
+      // Convert images to Base64 to bypass Supabase Storage bucket requirements
       for (const image of images) {
-        const fileExt = image.name.split('.').pop();
-        const fileName = `${Math.random()}.${fileExt}`;
-        const filePath = `${fileName}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from('project-images')
-          .upload(filePath, image);
-
-        if (uploadError) throw uploadError;
-
-        const { data } = supabase.storage
-          .from('project-images')
-          .getPublicUrl(filePath);
-
-        uploadedImages.push(data.publicUrl);
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(image);
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = (error) => reject(error);
+        });
+        uploadedImages.push(base64);
       }
 
       // Insert project
@@ -68,9 +60,9 @@ export default function AddProject() {
 
       toast.success("Project added successfully!");
       navigate("/portfolio");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error adding project:", error);
-      toast.error("Failed to add project");
+      toast.error(`Failed to add project: ${error?.message || "Unknown error"}`);
     } finally {
       setUploading(false);
     }
