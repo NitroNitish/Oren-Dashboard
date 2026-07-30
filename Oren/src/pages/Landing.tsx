@@ -103,11 +103,11 @@ export default function Landing() {
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
-                to="/dashboard"
+                to="/auth"
                 className="bg-white text-black rounded-full font-medium px-6 sm:px-8 py-2.5 sm:py-3 flex items-center gap-2 hover:bg-gray-200 transition-colors opacity-0 animate-blur-fade-up"
                 style={{ animationDelay: '600ms' }}
               >
-                <span>Go to Dashboard</span>
+                <span>Get Started</span>
               </Link>
             </div>
           </div>

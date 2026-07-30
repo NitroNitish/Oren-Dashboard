@@ -99,7 +99,7 @@ export default function Auth() {
         navigate("/dashboard");
       } else {
         const redirectUrl = `${window.location.origin}/dashboard`;
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
           options: {
@@ -119,10 +119,15 @@ export default function Auth() {
           return;
         }
 
-        toast.success("Account created! You can now login.");
-        setIsLogin(true);
-        setPassword("");
-        setConfirmPassword("");
+        if (data?.session) {
+          toast.success("Account created successfully!");
+          navigate("/dashboard");
+        } else {
+          toast.success("Account created! You can now login.");
+          setIsLogin(true);
+          setPassword("");
+          setConfirmPassword("");
+        }
       }
     } catch (error: any) {
       toast.error("An unexpected error occurred");

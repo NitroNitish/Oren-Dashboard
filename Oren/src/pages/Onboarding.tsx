@@ -69,7 +69,7 @@ export default function Onboarding() {
       });
       
       toast.success("Business profile saved successfully!");
-      navigate("/");
+      navigate("/dashboard");
     } catch (error: any) {
       console.error(error);
       toast.error(`Error: ${error?.message || "Failed to save profile. Check connection."}`);
