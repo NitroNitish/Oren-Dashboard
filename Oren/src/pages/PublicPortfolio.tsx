@@ -3,11 +3,22 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { Star } from "lucide-react";
 import { useBusinessProfile } from "@/contexts/BusinessProfileContext";
+import SEO from "../components/SEO";
 
 export default function PublicPortfolio() {
   const { profile } = useBusinessProfile();
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const businessName = profile?.businessName || "Portfolio";
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${businessName} - Public Portfolio`,
+    "description": "Showcase of our completed projects and client reviews.",
+    "url": window.location.href,
+  };
 
   useEffect(() => {
     loadProjects();
@@ -52,6 +63,11 @@ export default function PublicPortfolio() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title={`${businessName} Portfolio`}
+        description="Showcase of our completed projects and client reviews."
+        schema={schema}
+      />
       <header className="bg-primary text-primary-foreground shadow-lg">
         <div className="container mx-auto px-4 py-6">
           {profile?.logo && (

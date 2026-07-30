@@ -1,9 +1,22 @@
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function Landing() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Oren Dashboard",
+    "url": "https://oren-dashboard.com",
+    "description": "Professional quotation, billing, and portfolio management for your digital business."
+  };
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black text-white font-sans">
+      <SEO 
+        title="Home" 
+        description="Professional quotation, billing, and portfolio management for your digital business." 
+        schema={schema}
+      />
       {/* Background Video */}
       <video
         className="fixed inset-0 z-0 h-full w-full object-cover"

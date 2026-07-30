@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
 import { User, Mail, Lock } from "lucide-react";
-
+import SEO from "../components/SEO";
 const authSchema = z.object({
   email: z.string().trim().email({ message: "Invalid email address" }).max(255),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }).max(100),
@@ -163,6 +163,10 @@ export default function Auth() {
   if (isForgotPassword) {
     return (
       <div className="min-h-screen w-full flex font-sans">
+        <SEO 
+          title="Reset Password"
+          description="Reset your Oren Dashboard password."
+        />
         <LeftPanel />
         <div className="w-full md:w-[35%] flex items-center justify-center p-8 bg-background">
           <div className="w-full max-w-md space-y-8">
@@ -211,6 +215,10 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen w-full flex font-sans">
+      <SEO 
+        title={isLogin ? "Sign In" : "Sign Up"}
+        description={isLogin ? "Sign in to your Oren Dashboard account." : "Create a new Oren Dashboard account."}
+      />
       <LeftPanel />
 
       {/* Right Panel - Form */}
