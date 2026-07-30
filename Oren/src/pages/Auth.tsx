@@ -26,7 +26,7 @@ export default function Auth() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        navigate("/");
+        navigate("/dashboard");
       }
     });
   }, [navigate]);
@@ -96,9 +96,9 @@ export default function Auth() {
         }
 
         toast.success("Login successful!");
-        navigate("/");
+        navigate("/dashboard");
       } else {
-        const redirectUrl = `${window.location.origin}/`;
+        const redirectUrl = `${window.location.origin}/dashboard`;
         const { error } = await supabase.auth.signUp({
           email: email.trim(),
           password,

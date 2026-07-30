@@ -12,7 +12,7 @@ interface AppLayoutProps {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Quotation", href: "/quotation/new", icon: FileText },
   { name: "Billing", href: "/bill/new", icon: Receipt },
   { name: "Clients", href: "/clients", icon: Users },
