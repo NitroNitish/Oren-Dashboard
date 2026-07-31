@@ -147,15 +147,16 @@ export default function Clients() {
                     <span>{client.address}</span>
                   </div>
                 )}
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => setDeleteClientId(client.id)}
-                  className="mt-4 w-full"
-                >
-                  <Trash2 className="h-4 w-4 mr-2" />
-                  Delete Client
-                </Button>
+                <div className="flex justify-end mt-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setDeleteClientId(client.id)}
+                    className="text-destructive hover:bg-destructive hover:text-destructive-foreground h-8 w-8"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}

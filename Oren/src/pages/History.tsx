@@ -8,9 +8,11 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, FileText, Receipt, Search, Trash2, FileCheck } from "lucide-react";
 import { toast } from "sonner";
+import { useBusinessProfile } from "@/contexts/BusinessProfileContext";
 
 export default function History() {
   const navigate = useNavigate();
+  const { profile } = useBusinessProfile();
   const [quotations, setQuotations] = useState<any[]>([]);
   const [bills, setBills] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -81,7 +83,10 @@ export default function History() {
 
   const handleConvertToBill = async (quotation: any) => {
     try {
-      const billNumber = `RKW-B-${new Date().getFullYear()}-${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
+      const year = new Date().getFullYear();
+      const random = Math.floor(Math.random() * 1000).toString().padStart(3, "0");
+      const prefix = profile?.brandName ? profile.brandName.substring(0, 3).toUpperCase() : "BIL";
+      const billNumber = `${prefix}-B-${year}-${random}`;
       
       const billData = {
         bill_number: billNumber,

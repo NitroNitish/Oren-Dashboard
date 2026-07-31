@@ -17,6 +17,7 @@ export default function Dashboard() {
     totalClients: 0,
     totalProjects: 0,
   });
+  const [recentProjects, setRecentProjects] = useState<any[]>([]);
 
   useEffect(() => {
     loadStats();
@@ -28,7 +29,7 @@ export default function Dashboard() {
         supabase.from("quotations").select("grand_total"),
         supabase.from("bills").select("grand_total, paid_amount, payment_status"),
         supabase.from("clients").select("id", { count: "exact" }),
-        supabase.from("projects").select("id", { count: "exact" }),
+        supabase.from("projects").select("id, name, created_at, images", { count: "exact" }).order("created_at", { ascending: false }).limit(4),
       ]);
 
       const totalRevenue = bills.data?.reduce((sum, bill) => sum + Number(bill.grand_total), 0) || 0;
@@ -44,6 +45,10 @@ export default function Dashboard() {
         totalClients: clients.count || 0,
         totalProjects: projects.count || 0,
       });
+      
+      if (projects.data) {
+        setRecentProjects(projects.data);
+      }
     } catch (error) {
       console.error("Error loading stats:", error);
     }
@@ -185,6 +190,47 @@ export default function Dashboard() {
               <div className="text-3xl font-bold text-primary">{stats.totalProjects}</div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Recent Projects Section */}
+        <div className="mt-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-foreground">Recent Projects</h2>
+            <Button variant="outline" onClick={() => navigate("/portfolio")}>View All</Button>
+          </div>
+          
+          {recentProjects.length === 0 ? (
+            <Card className="p-8 text-center bg-muted/20">
+              <p className="text-muted-foreground mb-4">No projects added yet.</p>
+              <Button onClick={() => navigate("/portfolio/add")}>Add Your First Project</Button>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {recentProjects.map((project) => (
+                <Card key={project.id} className="overflow-hidden hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate("/portfolio")}>
+                  {project.images && project.images.length > 0 ? (
+                    <img 
+                      src={project.images[0]} 
+                      alt={project.name} 
+                      className="w-full h-32 object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-32 bg-muted flex items-center justify-center">
+                      <Briefcase className="h-8 w-8 text-muted-foreground/50" />
+                    </div>
+                  )}
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold truncate" title={project.name}>{project.name}</h3>
+                    {project.created_at && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Added: {new Date(project.created_at).toLocaleDateString()}
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </main>
     </div>
