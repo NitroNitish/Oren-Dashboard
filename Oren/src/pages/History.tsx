@@ -165,7 +165,7 @@ export default function History() {
                     <span>{quotation.quotation_number}</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-normal text-muted-foreground">
-                        {new Date(quotation.created_at).toLocaleDateString()}
+                        {new Date(quotation.created_at).toLocaleDateString('en-IN')}
                       </span>
                       <Button
                         variant="default"
@@ -225,7 +225,7 @@ export default function History() {
                     <span>{bill.bill_number}</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-normal text-muted-foreground">
-                        {new Date(bill.created_at).toLocaleDateString()}
+                        {new Date(bill.created_at).toLocaleDateString('en-IN')}
                       </span>
                       <Button
                         variant="ghost"

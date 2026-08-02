@@ -97,6 +97,20 @@ export default function BillForm() {
     setItems(newItems);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number, field: string) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (index < items.length - 1) {
+        document.getElementById(`item-${index + 1}-${field}`)?.focus();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (index > 0) {
+        document.getElementById(`item-${index - 1}-${field}`)?.focus();
+      }
+    }
+  };
+
   const subtotal = items.reduce((sum, item) => sum + item.total, 0);
   const taxAmount = (subtotal * taxPercentage) / 100;
   const discountAmount = (subtotal * discountPercentage) / 100;
@@ -210,7 +224,7 @@ export default function BillForm() {
     
     // Date on right
     doc.setTextColor(0, 0, 0);
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, pageWidth - 15, headerY, { align: "right" });
+    doc.text(`Date: ${new Date().toLocaleDateString('en-IN')}`, pageWidth - 15, headerY, { align: "right" });
     
     // Horizontal line
     doc.setDrawColor(249, 115, 22);
@@ -346,7 +360,7 @@ export default function BillForm() {
         <div className="bg-card text-card-foreground shadow-xl rounded-lg p-10 border border-border">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-primary mb-2">{id ? "Edit Bill / Invoice" : "New Bill / Invoice"}</h2>
-            <p className="text-sm text-muted-foreground">Date: {new Date().toLocaleDateString()}</p>
+            <p className="text-sm text-muted-foreground">Date: {new Date().toLocaleDateString('en-IN')}</p>
           </div>
 
           <div className="border-b-2 border-border pb-6 mb-8">
@@ -401,26 +415,32 @@ export default function BillForm() {
                   <div className="grid grid-cols-12 gap-3 items-center">
                     <div className="col-span-5">
                       <Input
+                        id={`item-${index}-name`}
                         value={item.name}
                         onChange={(e) => updateItem(index, "name", e.target.value)}
+                        onKeyDown={(e) => handleKeyDown(e, index, "name")}
                         placeholder="Item description"
                         className="h-10 border-gray-300"
                       />
                     </div>
                     <div className="col-span-2">
                       <Input
+                        id={`item-${index}-quantity`}
                         type="number"
                         value={item.quantity}
                         onChange={(e) => updateItem(index, "quantity", Number(e.target.value))}
+                        onKeyDown={(e) => handleKeyDown(e, index, "quantity")}
                         min="1"
                         className="h-10 border-gray-300"
                       />
                     </div>
                     <div className="col-span-2">
                       <Input
+                        id={`item-${index}-rate`}
                         type="number"
                         value={item.rate}
                         onChange={(e) => updateItem(index, "rate", Number(e.target.value))}
+                        onKeyDown={(e) => handleKeyDown(e, index, "rate")}
                         min="0"
                         step="0.01"
                         className="h-10 border-gray-300"

@@ -142,7 +142,7 @@ export default function Portfolio() {
                 <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
                 {project.completed_at && (
                   <p className="text-xs text-muted-foreground mb-4">
-                    Completed: {new Date(project.completed_at).toLocaleDateString()}
+                    Completed: {new Date(project.completed_at).toLocaleDateString('en-IN')}
                   </p>
                 )}
                 <div className="mb-4">

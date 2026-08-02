@@ -223,7 +223,7 @@ export default function Dashboard() {
                     <h3 className="font-semibold truncate" title={project.name}>{project.name}</h3>
                     {project.created_at && (
                       <p className="text-xs text-muted-foreground mt-1">
-                        Added: {new Date(project.created_at).toLocaleDateString()}
+                        Added: {new Date(project.created_at).toLocaleDateString('en-IN')}
                       </p>
                     )}
                   </CardContent>
